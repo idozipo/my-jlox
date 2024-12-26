@@ -25,13 +25,17 @@ public class GenerateAst {
         String path = outputDir + "/" + baseName + ".java";
         PrintWriter writer = new PrintWriter(path, "UTF-8");
 
-        writer.println("package com.craftinginterpreters.lox;");
+        writer.println("package jlox;");
         writer.println();
         writer.println("import java.util.List;");
         writer.println();
         writer.println("abstract class " + baseName + " {");
 
         defineVisitor(writer, baseName, types);
+
+        // The base accept() method.
+        writer.println();
+        writer.println("  abstract <R> R accept(Visitor<R> visitor);");
 
         // The AST classes.
         for (String type : types) {
@@ -53,10 +57,6 @@ public class GenerateAst {
             writer.println("    R visit" + typeName + baseName + "(" +
                     typeName + " " + baseName.toLowerCase() + ");");
         }
-
-        // The base accept() method.
-        writer.println();
-        writer.println("  abstract <R> R accept(Visitor<R> visitor);");
 
         writer.println("  }");
     }

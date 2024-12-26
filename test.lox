@@ -1,0 +1,17 @@
+class String {
+	init(str) {
+		this.str = str;
+	}
+	
+	getName() {
+		return this.str;
+	}
+	
+	append(str) {
+		this.str = this.str + str;
+	}
+}
+
+var str = String("Hello World");
+str.append("!");
+print str.getName();
